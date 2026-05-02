@@ -21,7 +21,7 @@ public class libarySimApplication {
 
 	@GetMapping("/book")
 	public String book(){
-		Book book = new Book(0, 1235664, "Harry Otter", "der Stein der alte", true);
+		Book book = new Book(0, "Harry Otter", "der Stein der alte", true);
 		return book.printBook(book);
 	}
 }
