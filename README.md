@@ -82,8 +82,8 @@ POST /books
 ### Phase 2 – Die Book Klasse
 - [x] Klasse `Book` mit Feldern `id`, `title`, `author`, `available` erstellt
 - [x] Konstruktor, Getter & Setter geschrieben
-- [ ] Im Controller eine feste Liste von Büchern manuell erstellt (noch keine DB)
-- [ ] `GET /books` gibt Buch-Objekte als JSON zurück
+- [x] Im Controller eine feste Liste von Büchern manuell erstellt (noch keine DB)
+- [x] `GET /books` gibt Buch-Objekte als JSON zurück
 
 ### Phase 3 – Datenbank anbinden
 - [ ] `@Entity` Annotation zur `Book` Klasse hinzugefügt
