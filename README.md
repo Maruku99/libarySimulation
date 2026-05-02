@@ -76,12 +76,12 @@ POST /books
 ### Phase 1 – Setup & erstes Lebenszeichen
 - [x] Projekt auf [start.spring.io](https://start.spring.io) erstellt (Gradle, Java 21, Spring Web, JPA, H2)
 - [x] Projekt in IDE geöffnet und erfolgreich gebaut
-- [(x)] `BookController` mit `GET /books` → gibt "Hello Books" zurück
+- [ ] `BookController` mit `GET /books` → gibt "Hello Books" zurück
 - [x] App gestartet, Antwort im Browser unter `localhost:8080/books` sichtbar
 
 ### Phase 2 – Die Book Klasse
-- [ ] Klasse `Book` mit Feldern `id`, `title`, `author`, `available` erstellt
-- [ ] Konstruktor, Getter & Setter geschrieben
+- [x] Klasse `Book` mit Feldern `id`, `title`, `author`, `available` erstellt
+- [x] Konstruktor, Getter & Setter geschrieben
 - [ ] Im Controller eine feste Liste von Büchern manuell erstellt (noch keine DB)
 - [ ] `GET /books` gibt Buch-Objekte als JSON zurück
 
