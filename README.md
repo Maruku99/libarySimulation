@@ -86,17 +86,17 @@ POST /books
 - [x] `GET /books` gibt Buch-Objekte als JSON zurück
 
 ### Phase 3 – Datenbank anbinden
-- [ ] `@Entity` Annotation zur `Book` Klasse hinzugefügt
-- [ ] `BookRepository` Interface erstellt (Spring Data JPA)
-- [ ] `BookService` erstellt – enthält die Business-Logik
-- [ ] Controller nutzt jetzt den Service statt einer festen Liste
+- [x] `@Entity` Annotation zur `Book` Klasse hinzugefügt
+- [x] `BookRepository` Interface erstellt (Spring Data JPA)
+- [x] `BookService` erstellt – enthält die Business-Logik
+- [x] Controller nutzt jetzt den Service statt einer festen Liste
 
 ### Phase 4 – CRUD Endpoints
-- [ ] `POST /books` → Buch hinzufügen
-- [ ] `GET /books` → alle Bücher abrufen
-- [ ] `GET /books/{id}` → einzelnes Buch
-- [ ] `DELETE /books/{id}` → Buch löschen
-- [ ] Alle Endpoints mit Postman getestet
+- [x] `POST /books` → Buch hinzufügen
+- [x] `GET /books` → alle Bücher abrufen
+- [x] `GET /books/{id}` → einzelnes Buch
+- [x] `DELETE /books/{id}` → Buch löschen
+- [x] Alle Endpoints mit Postman getestet
 
 ### Phase 5 – Business Logik
 - [ ] `available` Feld (true/false) korrekt gesetzt
