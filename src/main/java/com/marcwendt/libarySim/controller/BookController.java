@@ -3,6 +3,7 @@ package com.marcwendt.libarySim.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,7 @@ public class BookController {
     }
 
     @PostMapping
-    public void addBook(@RequestBody Book book){
+    public void addBook(@RequestBody @NonNull Book book){
         bookService.addBook(book);
     }
 
