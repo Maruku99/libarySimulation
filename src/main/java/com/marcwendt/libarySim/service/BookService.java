@@ -3,6 +3,7 @@ package com.marcwendt.libarySim.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.marcwendt.libarySim.model.Book;
@@ -26,7 +27,7 @@ public class BookService {
     }
 
     // Buch hinzufügen
-    public Book addBook(Book book) {
+    public Book addBook(@NonNull Book book) {
         return bookRepository.save(book);
     }
 
