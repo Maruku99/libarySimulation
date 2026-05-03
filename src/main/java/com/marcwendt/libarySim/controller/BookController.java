@@ -1,5 +1,7 @@
 package com.marcwendt.libarySim.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,23 +22,23 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping
-    public String getAllBooks() {
-        return "get all books";
+    public List<Book> getAllBooks() {
+        return bookService.getAllBooks();
     }
 
     @GetMapping("/{id}")
-    public String getBookById(@PathVariable long id){
-        return "get book by id " + id;
+    public Book getBookById(@PathVariable long id){
+        return bookService.getBookById(id);
     }
 
     @PostMapping
-    public String addBook(@RequestBody Book book){
-        return book.toString();
+    public void addBook(@RequestBody Book book){
+        bookService.addBook(book);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteBook(@PathVariable long id){
-        return "delete " + id;
+    public void deleteBook(@PathVariable long id){
+        bookService.deleteBook(id);
     }
 
     @PostMapping("/{id}/borrow")
