@@ -1,23 +1,33 @@
 package com.marcwendt.libarySim.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Book {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String title;
     private String author;
     private boolean isAvailable = true;
 
-    public Book(int id, String title, String author, boolean isAvailable) {
+    public Book(){}
+    
+    public Book(long id, String title, String author, boolean isAvailable) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isAvailable = isAvailable;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
