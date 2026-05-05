@@ -14,8 +14,15 @@ public class Book {
     private String author;
     private boolean isAvailable = true;
 
-    public Book(){}
-    
+    public Book() {
+    }
+
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+        this.isAvailable = true;
+    }
+
     public Book(long id, String title, String author, boolean isAvailable) {
         this.id = id;
         this.title = title;
