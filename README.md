@@ -26,7 +26,7 @@ Voraussetzungen: JDK 21
 
 ```bash
 # Projekt klonen
-git clone https://github.com/dein-username/bibliotheksverwaltung.git
+git clone https://github.com/maruku99/bibliotheksverwaltung.git
 cd bibliotheksverwaltung
 
 # App starten
@@ -107,4 +107,4 @@ src/
 
 ## Lizenz
 
-MIT (oder Wunschlizenz)
+MIT
