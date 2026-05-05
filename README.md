@@ -1,24 +1,28 @@
-# 📚 Bibliotheksverwaltung API
+# Bibliotheksverwaltung API
 
-A RESTful backend service for managing a library system — built with Java, Spring Boot and JPA.
-Users can add books, manage availability and borrow or return them via a clean REST API.
+REST API zur Verwaltung einer Bibliothek. Buecher koennen angelegt, ausgeliehen und zurueckgegeben werden. Die API ist bewusst klein gehalten und zeigt saubere Schichten (Controller, Service, Repository) mit Tests.
 
----
+## Features
 
-## 🛠️ Tech Stack
+- CRUD fuer Buecher
+- Ausleihen und Zurueckgeben mit Verfuegbarkeitslogik
+- In-Memory Datenbank (H2) fuer schnelle Demos
+- Tests fuer Controller und Service
 
-| Layer | Technology |
+## Tech Stack
+
+| Bereich | Technologie |
 |---|---|
-| Language | Java 21 |
+| Sprache | Java 21 |
 | Framework | Spring Boot 3.x |
-| Database | H2 (In-Memory) |
+| Datenbank | H2 (In-Memory) |
 | ORM | Spring Data JPA / Hibernate |
-| Build Tool | Gradle |
-| Testing | Postman |
+| Build | Gradle |
+| Tests | JUnit 5, Mockito, Spring Boot Test |
 
----
+## Quickstart
 
-## 🚀 Getting Started
+Voraussetzungen: JDK 21
 
 ```bash
 # Projekt klonen
@@ -29,35 +33,38 @@ cd bibliotheksverwaltung
 ./gradlew bootRun
 ```
 
-Die API ist dann erreichbar unter: `http://localhost:8080`
+Die API laeuft unter: http://localhost:8080
 
----
+Tests ausfuehren:
 
-## 📡 Endpoints
-
-| Method | Endpoint | Beschreibung |
-|---|---|---|
-| `GET` | `/books` | Alle Bücher abrufen |
-| `GET` | `/books/{id}` | Einzelnes Buch abrufen |
-| `POST` | `/books` | Neues Buch hinzufügen |
-| `DELETE` | `/books/{id}` | Buch löschen |
-| `POST` | `/books/{id}/borrow` | Buch ausleihen |
-| `POST` | `/books/{id}/return` | Buch zurückgeben |
-
----
-
-## 💡 Beispiel Request
-
-**Buch hinzufügen:**
-```json
-POST /books
-{
-  "title": "Clean Code",
-  "author": "Robert C. Martin"
-}
+```bash
+./gradlew test
 ```
 
-**Antwort:**
+## API Uebersicht
+
+| Methode | Pfad | Beschreibung | Statuscodes |
+|---|---|---|---|
+| GET | /books | Alle Buecher abrufen | 200 |
+| GET | /books/{id} | Buch nach ID | 200, 404 |
+| GET | /books/available | Verfuegbare Buecher | 200 |
+| POST | /books | Buch anlegen | 200 |
+| DELETE | /books/{id} | Buch loeschen | 200 |
+| POST | /books/{id}/borrow | Buch ausleihen | 200, 400, 404 |
+| POST | /books/{id}/return | Buch zurueckgeben | 200, 404 |
+
+## Beispiele
+
+Buch anlegen:
+
+```bash
+curl -X POST http://localhost:8080/books \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Clean Code","author":"Robert C. Martin"}'
+```
+
+Antwort:
+
 ```json
 {
   "id": 1,
@@ -67,79 +74,37 @@ POST /books
 }
 ```
 
----
+Buch ausleihen:
 
-## 📋 Lernfortschritt
+```bash
+curl -X POST http://localhost:8080/books/1/borrow
+```
 
-> Persönliche Checkliste während der Entwicklung
+## Architektur
 
-### Phase 1 – Setup & erstes Lebenszeichen
-- [x] Projekt auf [start.spring.io](https://start.spring.io) erstellt (Gradle, Java 21, Spring Web, JPA, H2)
-- [x] Projekt in IDE geöffnet und erfolgreich gebaut
-- [x] `BookController` mit `GET /books` → gibt "Hello Books" zurück
-- [x] App gestartet, Antwort im Browser unter `localhost:8080/books` sichtbar
+Controller -> Service -> Repository -> DB
 
-### Phase 2 – Die Book Klasse
-- [x] Klasse `Book` mit Feldern `id`, `title`, `author`, `available` erstellt
-- [x] Konstruktor, Getter & Setter geschrieben
-- [x] Im Controller eine feste Liste von Büchern manuell erstellt (noch keine DB)
-- [x] `GET /books` gibt Buch-Objekte als JSON zurück
-
-### Phase 3 – Datenbank anbinden
-- [x] `@Entity` Annotation zur `Book` Klasse hinzugefügt
-- [x] `BookRepository` Interface erstellt (Spring Data JPA)
-- [x] `BookService` erstellt – enthält die Business-Logik
-- [x] Controller nutzt jetzt den Service statt einer festen Liste
-
-### Phase 4 – CRUD Endpoints
-- [x] `POST /books` → Buch hinzufügen
-- [x] `GET /books` → alle Bücher abrufen
-- [x] `GET /books/{id}` → einzelnes Buch
-- [x] `DELETE /books/{id}` → Buch löschen
-- [x] Alle Endpoints mit Postman getestet
-
-### Phase 5 – Business Logik
-- [x] `available` Feld (true/false) korrekt gesetzt
-- [x] `POST /books/{id}/borrow` → Buch ausleihen (mit Verfügbarkeitsprüfung)
-- [x] `POST /books/{id}/return` → Buch zurückgeben
-- [x] Fehlerfall getestet: bereits ausgeliehenes Buch kann nicht nochmal ausgeliehen werden
-
-### Phase 6 – Fehlerbehandlung
-- [ ] Eigene Exception `BookNotFoundException` erstellt
-- [ ] Sinnvolle HTTP-Statuscodes zurückgegeben (200, 400, 404)
-- [ ] Unbekannte IDs geben klare Fehlermeldungen zurück
-
----
-
-## 📁 Projektstruktur
+## Projektstruktur
 
 ```
 src/
-└── main/
-    └── java/
-        └── com/example/bibliothek/
-            ├── controller/
-            │   └── BookController.java
-            ├── service/
-            │   └── BookService.java
-            ├── repository/
-            │   └── BookRepository.java
-            ├── model/
-            │   └── Book.java
-            └── exception/
-                └── BookNotFoundException.java
+  main/
+    java/
+      com/marcwendt/libarySim/
+        controller/
+        exception/
+        model/
+        repository/
+        service/
 ```
 
----
+## Roadmap (optional)
 
-## 🎯 Was ich dabei gelernt habe
+- DTOs + Validation fuer Eingaben
+- Einheitliches Error-Response-Format
+- OpenAPI/Swagger Doku
+- Persistente Datenbank-Konfiguration
 
-- REST API Design mit Spring Boot
-- Objektorientierung praktisch angewendet (Klassen, Services, Repositories)
-- Datenbankanbindung mit Spring Data JPA
-- Exception Handling und HTTP-Statuscodes
-- Projektstruktur in einem echten Backend-Projekt
+## Lizenz
 
----
-
-*Dieses Projekt wurde als erstes Portfolio-Projekt zur Vertiefung von Java Backend-Kenntnissen entwickelt.*
+MIT (oder Wunschlizenz)
