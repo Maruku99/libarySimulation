@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.marcwendt.libarySim.model.Book;
 import com.marcwendt.libarySim.service.BookService;
 
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -28,28 +29,33 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public Book getBookById(@PathVariable long id){
+    public Book getBookById(@PathVariable long id) {
         return bookService.getBookById(id);
     }
 
+    @GetMapping("/available")
+    public List<Book> getAvailableBooks() {
+        return bookService.getAvailableBooks();
+    }
+
     @PostMapping
-    public void addBook(@RequestBody @NonNull Book book){
+    public void addBook(@RequestBody @NonNull Book book) {
         bookService.addBook(book);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable long id){
+    public void deleteBook(@PathVariable long id) {
         bookService.deleteBook(id);
     }
 
     @PostMapping("/{id}/borrow")
-    public String borrowBook(@PathVariable long id){
-        return "Borrow Book" + id;
+    public void borrowBook(@PathVariable long id) {
+        bookService.borrowBookById(id);
     }
 
     @PostMapping("/{id}/return")
-    public String returnBook(@PathVariable long id){
-        return "returned book";
+    public void returnBook(@PathVariable long id) {
+        bookService.returnBookById(id);
     }
 
 }
