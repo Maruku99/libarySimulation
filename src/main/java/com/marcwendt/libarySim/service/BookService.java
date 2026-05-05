@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import com.marcwendt.libarySim.exception.BookAlreadyBorrowedException;
 import com.marcwendt.libarySim.exception.BookNotFoundException;
 import com.marcwendt.libarySim.model.Book;
 import com.marcwendt.libarySim.repository.BookRepository;
@@ -43,17 +44,16 @@ public class BookService {
     }
 
     // Buch ausleihen
-    public String borrowBookById(long id) {
+    public void borrowBookById(long id) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Buch mit ID " + id + " nicht gefunden"));
+                .orElseThrow(() -> new BookNotFoundException(id));
 
-        if (book.isAvailable()) {
-            book.setAvailable(false);
-            bookRepository.save(book);
-            return "Buch wurde ausgeliehen";
-        } else {
-            return "Buch ist bereits ausgeliehen";
+        if (!book.isAvailable()) {
+            throw new BookAlreadyBorrowedException(id);
         }
+
+        book.setAvailable(false);
+        bookRepository.save(book);
     }
 
     // Buch zurückgeben
