@@ -99,20 +99,15 @@ POST /books
 - [x] Alle Endpoints mit Postman getestet
 
 ### Phase 5 – Business Logik
-- [ ] `available` Feld (true/false) korrekt gesetzt
-- [ ] `POST /books/{id}/borrow` → Buch ausleihen (mit Verfügbarkeitsprüfung)
-- [ ] `POST /books/{id}/return` → Buch zurückgeben
-- [ ] Fehlerfall getestet: bereits ausgeliehenes Buch kann nicht nochmal ausgeliehen werden
+- [x] `available` Feld (true/false) korrekt gesetzt
+- [x] `POST /books/{id}/borrow` → Buch ausleihen (mit Verfügbarkeitsprüfung)
+- [x] `POST /books/{id}/return` → Buch zurückgeben
+- [x] Fehlerfall getestet: bereits ausgeliehenes Buch kann nicht nochmal ausgeliehen werden
 
 ### Phase 6 – Fehlerbehandlung
 - [ ] Eigene Exception `BookNotFoundException` erstellt
 - [ ] Sinnvolle HTTP-Statuscodes zurückgegeben (200, 400, 404)
 - [ ] Unbekannte IDs geben klare Fehlermeldungen zurück
-
-### Phase 7 – Bonus (optional)
-- [ ] Bücher nach Autor filtern: `GET /books?author=Kafka`
-- [ ] PostgreSQL statt H2 eingebunden
-- [ ] GitHub Repository mit diesem README veröffentlicht
 
 ---
 
