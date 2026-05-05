@@ -26,6 +26,11 @@ public class BookService {
                 .orElseThrow(() -> new RuntimeException("Buch nicht gefunden"));
     }
 
+    // Buch verfügbarkeit prüfen
+    public List<Book> getAvailableBooks() {
+        return bookRepository.findByIsAvailable(true);
+    }
+
     // Buch hinzufügen
     public Book addBook(@NonNull Book book) {
         return bookRepository.save(book);
@@ -36,4 +41,27 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+    // Buch ausleihen
+    public String borrowBookById(long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Buch mit ID " + id + " nicht gefunden"));
+
+        if (book.isAvailable()) {
+            book.setAvailable(false);
+            bookRepository.save(book);
+            return "Buch wurde ausgeliehen";
+        } else {
+            return "Buch ist bereits ausgeliehen";
+        }
+    }
+
+    // Buch zurückgeben
+    public String returnBookById(long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Buch nicht gefunden"));
+
+        book.setAvailable(true);
+        bookRepository.save(book);
+        return "Buch wurde zurückgegeben";
+    }
 }
