@@ -39,8 +39,8 @@ public class BookController {
     }
 
     @PostMapping
-    public void addBook(@RequestBody @NonNull Book book) {
-        bookService.addBook(book);
+    public Book addBook(@RequestBody @NonNull Book book) {
+        return bookService.addBook(book);
     }
 
     @DeleteMapping("/{id}")
