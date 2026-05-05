@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import com.marcwendt.libarySim.exception.BookNotFoundException;
 import com.marcwendt.libarySim.model.Book;
 import com.marcwendt.libarySim.repository.BookRepository;
 
@@ -23,7 +24,7 @@ public class BookService {
     // Einzelnes Buch suchen
     public Book getBookById(long id) {
         return bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Buch nicht gefunden"));
+                .orElseThrow(() -> new BookNotFoundException(id));
     }
 
     // Buch verfügbarkeit prüfen
@@ -58,7 +59,7 @@ public class BookService {
     // Buch zurückgeben
     public String returnBookById(long id) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Buch nicht gefunden"));
+                .orElseThrow(() -> new BookNotFoundException(id));
 
         book.setAvailable(true);
         bookRepository.save(book);
