@@ -13,4 +13,10 @@ public class GlobalExceptionHandler {
     public String handleNotFound(BookNotFoundException e) {
         return e.getMessage();
     }
+
+    @ExceptionHandler(BookAlreadyBorrowedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleAlreadyBorrowed(BookAlreadyBorrowedException e) {
+        return e.getMessage();
+    }
 }
